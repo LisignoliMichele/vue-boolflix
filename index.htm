@@ -39,8 +39,8 @@
                      <div class="info">
                         <p>Titolo: <br><strong>{{movie.title}}</strong></p>
                         <p>Titolo originale: <br><strong>{{movie.original_title}}</strong></p>
-                        <p>Voto: <br></strong><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-                        <p>Riassunto:<br>{{movie.overview}}</p>
+                        <p v-if=" movie.vote_average > 0">Voto: <br><strong><i v-for=" n in movie.vote_average" class="fas fa-star"></i></strong></p>
+                        <p v-if="movie.overview != ''" >Riassunto:<br>{{movie.overview}}</p>
                      </div>
                     
                </div>
