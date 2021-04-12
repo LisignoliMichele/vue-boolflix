@@ -2,19 +2,27 @@ var app = new Vue ({
    el: "#app",
    data:{
       searchURL: "https://api.themoviedb.org/3/search/",
-      kind: ['movie', 'tv'],
       kindIndex: 0,
       movies: [],
       series:[],
       search: "",
       apiKey: "f89e14052a0d0db382004cc67a28c7d5",
-      languages: ["it-IT", "en-US", "es-ES"],
+      languages: ["it-IT", "en-US", "es-ES", "zh-CN", "de-DE", "ru-RU"],
       languagesIndex: 0,
+      styleSearchWw: "",
+      styleSearchBg: "",
    },
    methods:{
-      
+
+      searchActive: function(){
+         if (this.styleSearchWw == ''){
+               this.styleSearchWw = 'styleSearchWw__active';
+               this.styleSearchBg = 'styleSearchBg__active';
+         }
+      },
       getMovie: function(){
-         axios.get(this.searchURL + this.kind[this.kindIndex], {
+         
+         axios.get(this.searchURL + "movie", {
             params: {
                api_key: this.apiKey,
                query: this.search,
@@ -27,6 +35,8 @@ var app = new Vue ({
 
                movie.vote_average = Math.round(movie.vote_average / 2);
                this.movies.push(movie)
+               this.styleSearchWw = '';
+               this.styleSearchBg = '';
              });
          });
 
@@ -43,13 +53,13 @@ var app = new Vue ({
          
                serie.vote_average = Math.round(serie.vote_average / 2);
                this.series.push(serie);
-         
                this.search = '';
+               this.styleSearchWw = '';
+               this.styleSearchBg = '';
+               
              });
          });
 
-      },
-         
-      
+      },  
    }
 });

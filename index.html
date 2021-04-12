@@ -25,8 +25,19 @@
                      <img src="img/boolflix.png" alt="boolflix logo">
                   </div>
                   <div class="right">
-                     <div class="search">
-                        <input v-model="search" type="text" placeholder="Che film vuoi guardare" @keydown.13="getMovie">
+                     <div :class="styleSearchBg" class="search">
+                        <label @click="searchActive" class="searchIcon" for="searchInput"><i class="fas fa-search"></i></label>
+                        <input :class="styleSearchWw" class="searchInput" id="searchInput" v-model="search" type="text" placeholder="Titoli, Persone, Generi" @keydown.13="getMovie">
+                     </div>
+                     <div class='languages'>
+                        <select  v-model="languagesIndex" name="" id="">
+                           <option value="0">Italiano</option>
+                           <option value="1">Inglese</option>
+                           <option value="2">Spagnolo</option>
+                           <option value="3">Cinese</option>
+                           <option value="4">Tedesco</option>
+                           <option value="5">Russo</option>
+                        </select>
                      </div>
                   </div>
                </nav>

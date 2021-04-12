@@ -8,7 +8,7 @@ body{
    font-family: 'Acme', sans-serif;
 }
 .container.navBar{
-   background-color: rgba(255, 255, 255, 0.5);
+   background-color: rgba(255, 255, 255, 0.1);
    position:fixed;
    width: 100%;
    top: 0;
@@ -24,7 +24,26 @@ body{
 .logo img{
     max-width: 150px;
 }
-
+nav .right{
+   display: flex;
+   align-items: center;
+}
+nav .right .languages{
+   margin-left: 20px;
+}
+.languages select{
+   background: transparent;
+   border: transparent;
+   color: #fff;
+}
+.languages select option{
+   background-color: red;
+   border: transparent;
+   color: #fff;
+}
+.languages select:focus{
+   outline: transparent;
+}
 section{
    margin-left:30px;
    margin-top: 50px;
@@ -40,7 +59,6 @@ section h2{
 .series{
    display: flex;
    flex-wrap: wrap;
-   
 }
 .movie{
    width: calc((100% / 5) - 30px);
@@ -51,8 +69,7 @@ section h2{
 .movie img{
    width: 100%;
    height: 100%;
-   object-fit: cover;
-   object-position: center;
+   object-fit: contain;
 }
 .movie:not(:last-child){
    margin-right: 30px;
@@ -79,25 +96,37 @@ section h2{
 .movie:hover .info{
    display: block;
 }
+.search{
+   padding: 10px;
+}
+.searchInput{
+   background-color: transparent;
+   border: transparent;
+   margin-left: 10px;
+   color: #fff;
+   font-family: 'Acme', sans-serif;
+   font-size: 16px;
+   width: 0;
+   transition: width 0.5s;
+}
+.searchInput:focus{
+   outline: transparent;
+}
+.styleSearchWw__active{
+   width: 200px;
+}
+.styleSearchBg__active{
+   border: 1px solid #fff;
+   background-color: #000;
+}
+.searchIcon{
+   color: #fff;
+}
 
-@media screen and (max-width: 1600px){
-   .movie{
-      height: 400px;
-   }
-}
-@media screen and (max-width: 1300px){
-   .movie{
-      height: 330px;
-   }
-}
+
 @media screen and (max-width: 1150px){
    .movie{
       width: calc((100% / 4) - 30px);
-   }
-}
-@media screen and (max-width: 900px){
-   .movie{
-      height: 270px;
    }
 }
 @media screen and (max-width: 800px){
