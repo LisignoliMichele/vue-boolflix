@@ -5,6 +5,7 @@
 }
 body{
    background-color: #212322;
+   font-family: 'Acme', sans-serif;
 }
 .container.navBar{
    background-color: rgba(255, 255, 255, 0.5);
@@ -23,11 +24,23 @@ body{
 .logo img{
     max-width: 150px;
 }
-.movies{
-   margin-top: 80px;
+
+section{
+   margin-left:30px;
+   margin-top: 50px;
+}
+section:first-of-type{
+   margin-top: 100px;
+}
+section h2{
+   color: #cecece;
+   margin-bottom: 20px;
+}
+.movies,
+.series{
    display: flex;
    flex-wrap: wrap;
-   margin-left:30px
+   
 }
 .movie{
    width: calc((100% / 5) - 30px);
@@ -54,7 +67,6 @@ body{
  .movie .info p{
     margin-bottom: 25px;
     color: #cecece;
-    font-family: 'Acme', sans-serif;
     font-size: 20px;
  }
  .movie .info strong{

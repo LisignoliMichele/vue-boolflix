@@ -33,7 +33,23 @@
             </div>
          </header>
          <main>
-            <div class="movies">
+            <section v-if="series.length != 0" class="series_section">
+               <h2>serie TV</h2>
+               <div class="series">
+                  <div class="movie"v-for="serie in series" v-if="serie.poster_path != null" class="serie">
+                     <img :src="'https://image.tmdb.org/t/p/w500' + serie.poster_path" :alt="serie.name">
+                     <div class="info">
+                        <p>Titolo: <br><strong>{{serie.name}}</strong></p>
+                        <p>Titolo originale: <br><strong>{{serie.original_name}}</strong></p>
+                        <p v-if=" serie.vote_average > 0">Voto: <br><strong><i v-for=" n in serie.vote_average" class="fas fa-star"></i></strong></p>
+                        <p v-if="serie.overview != ''" >Riassunto:<br>{{serie.overview}}</p>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <section v-if="movies.length != 0" class="movies_section">
+               <h2>Movies</h2>
+               <div class="movies">
                   <div class="movie"v-for="movie in movies" v-if="movie.poster_path != null" class="movie">
                      <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" :alt="movie.title">
                      <div class="info">
@@ -42,9 +58,9 @@
                         <p v-if=" movie.vote_average > 0">Voto: <br><strong><i v-for=" n in movie.vote_average" class="fas fa-star"></i></strong></p>
                         <p v-if="movie.overview != ''" >Riassunto:<br>{{movie.overview}}</p>
                      </div>
-                    
+                  </div>
                </div>
-            </div>
+            </section>
          </main>
       </div>
       <script src="js/script.js"></script>
