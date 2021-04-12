@@ -17,6 +17,7 @@ var app = new Vue ({
          .then((serverAnswer) => {
             this.movies = serverAnswer.data.results
             this.search = ''
+            console.log(this.movies)
          });  
       }
    }
