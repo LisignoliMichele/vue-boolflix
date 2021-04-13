@@ -9,7 +9,7 @@
       <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
       <!-- gfont -->
       <link rel="preconnect" href="https://fonts.gstatic.com">
-      <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
       <!-- axios cdn -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
       <!-- fontawesome -->
@@ -31,12 +31,12 @@
                      </div>
                      <div class='languages'>
                         <select  v-model="languagesIndex" name="" id="">
-                           <option value="0">Italiano</option>
-                           <option value="1">Inglese</option>
-                           <option value="2">Spagnolo</option>
-                           <option value="3">Cinese</option>
-                           <option value="4">Tedesco</option>
-                           <option value="5">Russo</option>
+                           <option value="0">IT</option>
+                           <option value="1">EN</option>
+                           <option value="2">ES</option>
+                           <option value="3">DE</option>
+                           <option value="4">中国</option>
+                           <option value="5">RU</option>
                         </select>
                      </div>
                   </div>
@@ -48,12 +48,17 @@
                <h2>serie TV</h2>
                <div class="series">
                   <div class="movie"v-for="serie in series" v-if="serie.poster_path != null" class="serie">
-                     <img :src="'https://image.tmdb.org/t/p/w500' + serie.poster_path" :alt="serie.name">
+                     <div class="poster">
+                        <img :src="'https://image.tmdb.org/t/p/w500' + serie.poster_path" :alt="serie.name">
+                     </div>
                      <div class="info">
-                        <p>Titolo: <br><strong>{{serie.name}}</strong></p>
-                        <p>Titolo originale: <br><strong>{{serie.original_name}}</strong></p>
-                        <p v-if=" serie.vote_average > 0">Voto: <br><strong><i v-for=" n in serie.vote_average" class="fas fa-star"></i></strong></p>
-                        <p v-if="serie.overview != ''" >Riassunto:<br>{{serie.overview}}</p>
+                        <div class="flag">
+                           <img :src="languages[languagesIndex].flag" alt="">
+                        </div>
+                        <p>{{languages[languagesIndex].title}}: <br><strong>{{serie.name}}</strong></p>
+                        <p>{{languages[languagesIndex].originalName}}: <br><strong>{{serie.original_name}}</strong></p>
+                        <p v-if=" serie.vote_average > 0">{{languages[languagesIndex].vote}}: <br><strong><i v-for=" n in serie.vote_average" class="fas fa-star"></i></strong></p>
+                        <p v-if="serie.overview != ''" >{{languages[languagesIndex].overview}}:<br>{{serie.overview}}</p>
                      </div>
                   </div>
                </div>
@@ -62,12 +67,17 @@
                <h2>Movies</h2>
                <div class="movies">
                   <div class="movie"v-for="movie in movies" v-if="movie.poster_path != null" class="movie">
-                     <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" :alt="movie.title">
+                     <div class="poster">
+                        <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" :alt="movie.title">
+                     </div>
                      <div class="info">
-                        <p>Titolo: <br><strong>{{movie.title}}</strong></p>
-                        <p>Titolo originale: <br><strong>{{movie.original_title}}</strong></p>
-                        <p v-if=" movie.vote_average > 0">Voto: <br><strong><i v-for=" n in movie.vote_average" class="fas fa-star"></i></strong></p>
-                        <p v-if="movie.overview != ''" >Riassunto:<br>{{movie.overview}}</p>
+                        <div class="flag">
+                           <img :src="languages[languagesIndex].flag" alt="">
+                        </div>
+                        <p>{{languages[languagesIndex].title}}: <br><strong>{{movie.title}}</strong></p>
+                        <p>{{languages[languagesIndex].originalName}}: <br><strong>{{movie.original_title}}</strong></p>
+                        <p v-if=" movie.vote_average > 0">{{languages[languagesIndex].vote}}: <br><strong><i v-for=" n in movie.vote_average" class="fas fa-star"></i></strong></p>
+                        <p v-if="movie.overview != ''" >{{languages[languagesIndex].overview}}:<br>{{movie.overview}}</p>
                      </div>
                   </div>
                </div>

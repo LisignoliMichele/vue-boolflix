@@ -7,7 +7,57 @@ var app = new Vue ({
       series:[],
       search: "",
       apiKey: "f89e14052a0d0db382004cc67a28c7d5",
-      languages: ["it-IT", "en-US", "es-ES", "zh-CN", "de-DE", "ru-RU"],
+      languages:[
+         {
+            language: "it-IT",
+            flag: "img/IT_flag.png",
+            title: "Titolo",
+            originalName: "Titolo originale",
+            vote: "Voto",
+            overview: "Riassunto"
+         },
+         {
+            language: "en-US",
+            flag: "img/EN_flag.png",
+            title: "Title",
+            originalName: "Original name",
+            vote: "Vote",
+            overview: "Overview"
+         },
+         {
+            language: "es-ES",
+            flag: "img/ES_flag.png",
+            title: "Título",
+            originalName: "Nombre original",
+            vote: "Votar",
+            overview: "Descripción"
+         },
+         {
+            language: "de-DE",
+            flag: "img/DE_flag.png",
+            title: "Titel",
+            originalName: "Originaler Titel",
+            vote: "Abstimmung",
+            overview: "Überblick"
+         },
+         { 
+            language: "zh-CN",
+            flag: "img/CI_flag.png",
+            title: "标题",
+            originalName: "原名",
+            vote: "投票",
+            overview: "概述"
+         },
+         {
+            language: "ru-RU",
+            flag: "img/RU_flag.png",
+            title: "Заголовок",
+            originalName: "Оригинальное название" ,
+            vote: "Голосование",
+            overview: "Рассмотрение"
+         },
+            
+      ],
       languagesIndex: 0,
       styleSearchWw: "",
       styleSearchBg: "",
@@ -26,7 +76,7 @@ var app = new Vue ({
             params: {
                api_key: this.apiKey,
                query: this.search,
-               language: this.languages[this.languagesIndex],
+               language: this.languages[this.languagesIndex].language,
             }
          })
          .then((serverAnswer) => {
@@ -44,7 +94,7 @@ var app = new Vue ({
             params: {
                api_key: this.apiKey,
                query: this.search,
-               language: this.languages[this.languagesIndex],
+               language: this.languages[this.languagesIndex].language,
             }
          })
          .then((serverAnswer) => {
