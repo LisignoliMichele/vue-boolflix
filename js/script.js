@@ -2,9 +2,13 @@ var app = new Vue ({
    el: "#app",
    data:{
       searchURL: "https://api.themoviedb.org/3/search/",
-      kindIndex: 0,
+      creditsURL: "https://api.themoviedb.org/3/",
+      serieIndex: 0,
+      moviesIndex: 0,
       movies: [],
       series:[],
+      seriesCast: [],
+      moviesCast: [],
       search: "",
       apiKey: "f89e14052a0d0db382004cc67a28c7d5",
       languages:[
@@ -52,6 +56,7 @@ var app = new Vue ({
          },
             
       ],
+      flags:["ad", "ae", "af", "al", "ar", "at", "ch", "cn", "cs", "da", "de", "en", "es", "et", "eu", "fi", "fr", "gl", "hi", "hr", "hu", "it", "ja", "ka", "ko", "ml", "nl", "no", "pl", "pt", "ru", "sr", "sv", "te", "th", "tl", "zr", "zh"],
       languagesIndex: 0,
       styleSearchWw: "",
       styleSearchBg: "",
@@ -116,7 +121,54 @@ var app = new Vue ({
                
              });
          });
+      },
 
+      getTvCredits: function(){
+         this.seriesCast = [],
+         axios.get(this.creditsURL + "tv/" + this.series[this.serieIndex].id + "/credits?v", {
+            params: {
+               api_key: this.apiKey,
+            }
+            })
+            .then((serverAnswer) =>{
+               if (serverAnswer.data.cast.length != 0){
+                  if (serverAnswer.data.cast.length > 5){
+                     for(let i = 0; i < 5; i++){
+                        this.seriesCast.push(serverAnswer.data.cast[i].name);
+                     }
+                  }else{
+                     serverAnswer.data.cast.forEach((character) =>{
+                        this.seriesCast.push(character.name);
+                     })
+                  }
+                  console.log(this.seriesCast)
+               }
+            })
+      },
+      getMovieCredits: function(){
+         this.moviesCast = [],
+         axios.get(this.creditsURL + "movie/" + this.movies[this.moviesIndex].id + "/credits?v", {
+            params: {
+               api_key: this.apiKey,
+            }
+            })
+            .then((serverAnswer) =>{
+               if (serverAnswer.data.cast.length != 0){
+                  if (serverAnswer.data.cast.length > 5){
+                     for(let i = 0; i < 5; i++){
+                        this.moviesCast.push(serverAnswer.data.cast[i].name);
+                     }
+                  }else{
+                     serverAnswer.data.cast.forEach((character) =>{
+                        this.moviesCast.push(character.name);
+                     })
+                  }
+                  console.log(this.moviesCast)
+               }
+            })
       },
    }
 });
+
+
+  
