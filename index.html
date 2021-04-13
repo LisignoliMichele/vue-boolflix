@@ -47,13 +47,13 @@
             <section v-if="series.length != 0" class="series_section">
                <h2>serie TV</h2>
                <div class="series">
-                  <div class="movie"v-for="serie in series" v-if="serie.poster_path != null" class="serie">
+                  <div class="movie" v-for="serie in series" v-if="serie.poster_path != null" class="serie">
                      <div class="poster">
                         <img :src="'https://image.tmdb.org/t/p/w500' + serie.poster_path" :alt="serie.name">
                      </div>
                      <div class="info">
                         <div class="flag">
-                           <img :src="languages[languagesIndex].flag" alt="">
+                           <img v-if="serie.original_name != ''" :src="'img/' + serie.original_language + '.png'" alt="">
                         </div>
                         <p>{{languages[languagesIndex].title}}: <br><strong>{{serie.name}}</strong></p>
                         <p>{{languages[languagesIndex].originalName}}: <br><strong>{{serie.original_name}}</strong></p>
@@ -72,7 +72,7 @@
                      </div>
                      <div class="info">
                         <div class="flag">
-                           <img :src="languages[languagesIndex].flag" alt="">
+                           <img v-if="movie.original_name != ''" :src="'img/' + movie.original_language + '.png'" alt="">
                         </div>
                         <p>{{languages[languagesIndex].title}}: <br><strong>{{movie.title}}</strong></p>
                         <p>{{languages[languagesIndex].originalName}}: <br><strong>{{movie.original_title}}</strong></p>
