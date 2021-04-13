@@ -14,47 +14,64 @@ var app = new Vue ({
       languages:[
          {
             language: "it-IT",
+            sectionTvTitle: "Serie TV",
+            sectionMoviesTitle: "Film",
             title: "Titolo",
             originalName: "Titolo originale",
             vote: "Voto",
-            overview: "Riassunto"
+            overview: "Riassunto",
+            charactersButton: "scopri gli attori"
          },
          {
             language: "en-US",
+            sectionTvTitle: "TV Series",
+            sectionMoviesTitle: "Movies",
             title: "Title",
             originalName: "Original name",
             vote: "Vote",
-            overview: "Overview"
+            overview: "Overview",
+            charactersButton: "find actors"
          },
          {
             language: "es-ES",
             title: "Título",
+            sectionTvTitle: "Series de Televisión",
+            sectionMoviesTitle: "Película",
             originalName: "Nombre original",
             vote: "Votar",
-            overview: "Descripción"
+            overview: "Descripción",
+            charactersButton: "descubrir actores"
          },
          {
             language: "de-DE",
             title: "Titel",
+            sectionTvTitle: "TV-Serie",
+            sectionMoviesTitle: "Filme",
             originalName: "Originaler Titel",
             vote: "Abstimmung",
-            overview: "Überblick"
+            overview: "Überblick",
+            charactersButton: "Schauspieler finden"
          },
          { 
             language: "zh-CN",
             title: "标题",
+            sectionTvTitle: "电视剧",
+            sectionMoviesTitle: "电影",
             originalName: "原名",
             vote: "投票",
-            overview: "概述"
+            overview: "概述",
+            charactersButton: "寻找演员"
          },
          {
             language: "ru-RU",
             title: "Заголовок",
+            sectionTvTitle: "Серия ТВ",
+            sectionMoviesTitle: "Кино",
             originalName: "Оригинальное название" ,
             vote: "Голосование",
-            overview: "Рассмотрение"
-         },
-            
+            overview: "Рассмотрение",
+            charactersButton: "найти актеров"
+         }   
       ],
       flags:["ad", "ae", "af", "al", "ar", "at", "ch", "cn", "cs", "da", "de", "en", "es", "et", "eu", "fi", "fr", "gl", "hi", "hr", "hu", "it", "ja", "ka", "ko", "ml", "nl", "no", "pl", "pt", "ru", "sr", "sv", "te", "th", "tl", "zr", "zh"],
       languagesIndex: 0,

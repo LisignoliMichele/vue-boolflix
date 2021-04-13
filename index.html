@@ -53,9 +53,9 @@
          <main>
             <!-- TV SERIES  -->
             <section v-if="series.length != 0" class="series_section">
-               <h2>serie TV</h2>
+               <h2>{{languages[languagesIndex].sectionTvTitle}}</h2>
                <div v-dragscroll class="series">
-                  <div class="movie" v-for="(serie, index) in series" @click="serieIndex = index" v-if="serie.poster_path != null" class="serie">
+                  <div class="movie" v-for="(serie, index) in series" @click="serieIndex = index" v-on:mouseleave="seriesCast = []" v-if="serie.poster_path != null" class="serie">
                      <div class="poster">
                         <img :src="'https://image.tmdb.org/t/p/w500' + serie.poster_path" :alt="serie.name">
                      </div>
@@ -68,10 +68,12 @@
                         <p>{{languages[languagesIndex].originalName}}: <br><strong>{{serie.original_name}}</strong></p>
                         <p v-if=" serie.vote_average > 0">{{languages[languagesIndex].vote}}: <br><strong><i v-for=" n in serie.vote_average" class="fas fa-star"></i></strong></p>
                         <p v-if="serie.overview != ''" >{{languages[languagesIndex].overview}}:<br>{{serie.overview}}</p>
-                        <button @click="getTvCredits">Scopri gli attori</button>
-                        <ul v-if="seriesCast.length != 0">
-                           <li v-for="character in seriesCast ">{{character}}</li>
-                        </ul>
+                        <div class="characters">
+                           <button @click="getTvCredits">{{languages[languagesIndex].charactersButton}}</button>
+                           <ul v-if="seriesCast.length != 0">
+                              <li v-for="character in seriesCast ">{{character}}</li>
+                           </ul>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -79,7 +81,7 @@
             <!-- /TV SERIES  -->
             <!-- MOVIES  -->
             <section v-if="movies.length != 0" class="movies_section">
-               <h2>Movies</h2>
+               <h2>{{languages[languagesIndex].sectionMoviesTitle}}</h2>
                <div v-dragscroll class="movies">
                   <div class="movie" v-for="(movie, index) in movies" @click="moviesIndex = index" v-on:mouseleave="moviesCast = []" v-if="movie.poster_path != null" class="movie">
                      <div class="poster">
@@ -94,10 +96,12 @@
                         <p>{{languages[languagesIndex].originalName}}: <br><strong>{{movie.original_title}}</strong></p>
                         <p v-if=" movie.vote_average > 0">{{languages[languagesIndex].vote}}: <br><strong><i v-for=" n in movie.vote_average" class="fas fa-star"></i></strong></p>
                         <p v-if="movie.overview != ''" >{{languages[languagesIndex].overview}}:<br>{{movie.overview}}</p>
-                        <button @click="getMovieCredits">Scopri gli attori</button>
-                        <ul v-if="moviesCast.length != 0">
-                           <li v-for="character in moviesCast ">{{character}}</li>
-                        </ul>
+                        <div class="characters">
+                           <button @click="getMovieCredits">{{languages[languagesIndex].charactersButton}}</button>
+                           <ul v-if="moviesCast.length != 0">
+                              <li v-for="character in moviesCast ">{{character}}</li>
+                           </ul>
+                        </div>
                      </div>
                   </div>
                </div>

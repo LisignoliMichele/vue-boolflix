@@ -134,12 +134,33 @@ section h2{
     display: none;
     overflow: scroll;
  }
- .info li{
-    color: #fff;
- }
  .info::-webkit-scrollbar{
-    display: none;
+   display: none;
+}
+ .info ul{
+    margin-top: 25px;
  }
+ .info li{
+    margin-top: 5px;
+    font-size: 20px;
+    color: #fff;
+    list-style: none;
+ }
+ .info button{
+    background: transparent;
+    color: #cecece;
+    text-transform: uppercase;
+    padding: 10px;
+    border: 4px dotted #cecece;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+ }
+ .info button:hover{
+   color: #fff;  
+   border: 5px dotted #fff;
+ }
+
  .movie .info p{
     margin-bottom: 25px;
     color: #cecece;
