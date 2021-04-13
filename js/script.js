@@ -10,7 +10,6 @@ var app = new Vue ({
       languages:[
          {
             language: "it-IT",
-            flag: "img/IT_flag.png",
             title: "Titolo",
             originalName: "Titolo originale",
             vote: "Voto",
@@ -18,7 +17,6 @@ var app = new Vue ({
          },
          {
             language: "en-US",
-            flag: "img/EN_flag.png",
             title: "Title",
             originalName: "Original name",
             vote: "Vote",
@@ -26,7 +24,6 @@ var app = new Vue ({
          },
          {
             language: "es-ES",
-            flag: "img/ES_flag.png",
             title: "Título",
             originalName: "Nombre original",
             vote: "Votar",
@@ -34,7 +31,6 @@ var app = new Vue ({
          },
          {
             language: "de-DE",
-            flag: "img/DE_flag.png",
             title: "Titel",
             originalName: "Originaler Titel",
             vote: "Abstimmung",
@@ -42,7 +38,6 @@ var app = new Vue ({
          },
          { 
             language: "zh-CN",
-            flag: "img/CI_flag.png",
             title: "标题",
             originalName: "原名",
             vote: "投票",
@@ -50,7 +45,6 @@ var app = new Vue ({
          },
          {
             language: "ru-RU",
-            flag: "img/RU_flag.png",
             title: "Заголовок",
             originalName: "Оригинальное название" ,
             vote: "Голосование",
@@ -61,6 +55,7 @@ var app = new Vue ({
       languagesIndex: 0,
       styleSearchWw: "",
       styleSearchBg: "",
+      styleCancel__X: "",
    },
    methods:{
 
@@ -68,7 +63,19 @@ var app = new Vue ({
          if (this.styleSearchWw == ''){
                this.styleSearchWw = 'styleSearchWw__active';
                this.styleSearchBg = 'styleSearchBg__active';
+               
          }
+      },
+      showXdelete: function(){
+         if (this.search != ''){
+            this.styleCancel__X ='cancel__X__active';
+         }else{
+            this.styleCancel__X ='';
+         }
+      },
+      xDelete: function(){
+         this.search = "",
+         this.styleCancel__X ='';
       },
       getMovie: function(){
          
@@ -85,8 +92,8 @@ var app = new Vue ({
 
                movie.vote_average = Math.round(movie.vote_average / 2);
                this.movies.push(movie)
-               this.styleSearchWw = '';
-               this.styleSearchBg = '';
+               // this.styleSearchWw = '';
+               // this.styleSearchBg = '';
              });
          });
 
@@ -103,13 +110,13 @@ var app = new Vue ({
          
                serie.vote_average = Math.round(serie.vote_average / 2);
                this.series.push(serie);
-               this.search = '';
-               this.styleSearchWw = '';
-               this.styleSearchBg = '';
+               // this.search = '';
+               // this.styleSearchWw = '';
+               // this.styleSearchBg = '';
                
              });
          });
 
-      },  
+      },
    }
 });

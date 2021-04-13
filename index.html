@@ -18,19 +18,24 @@
    </head>
    <body>
       <div id="app">
+         <!-- HEADER NAV-->
          <header>
             <div class="container navBar">
                <nav>
+                  <!-- LOGO -->
                   <div class="logo left">
                      <img src="img/boolflix.png" alt="boolflix logo">
                   </div>
+                  <!-- LOGO -->
                   <div class="right">
+                     <!-- SEARCH AND SELECT -->
                      <div :class="styleSearchBg" class="search">
                         <label @click="searchActive" class="searchIcon" for="searchInput"><i class="fas fa-search"></i></label>
-                        <input :class="styleSearchWw" class="searchInput" id="searchInput" v-model="search" type="text" placeholder="Titoli, Persone, Generi" @keydown.13="getMovie">
+                        <input @keypress="showXdelete" :class="styleSearchWw" class="searchInput" id="searchInput" v-model="search" type="text" placeholder="Titoli, Persone, Generi" @keydown.13="getMovie">
+                        <div :class="styleCancel__X" @click="xDelete" class="cancel__X"><i class="fas fa-times"></i></div>
                      </div>
                      <div class='languages'>
-                        <select  v-model="languagesIndex" name="" id="">
+                        <select  v-model="languagesIndex" name="" id="" @change="getMovie">
                            <option value="0">IT</option>
                            <option value="1">EN</option>
                            <option value="2">ES</option>
@@ -39,14 +44,17 @@
                            <option value="5">RU</option>
                         </select>
                      </div>
+                     <!-- /SEARCH AND SELECT -->
                   </div>
                </nav>
             </div>
          </header>
+         <!-- HEADER NAV-->
          <main>
+            <!-- TV SERIES  -->
             <section v-if="series.length != 0" class="series_section">
                <h2>serie TV</h2>
-               <div class="series">
+               <div v-dragscroll class="series">
                   <div class="movie" v-for="serie in series" v-if="serie.poster_path != null" class="serie">
                      <div class="poster">
                         <img :src="'https://image.tmdb.org/t/p/w500' + serie.poster_path" :alt="serie.name">
@@ -63,9 +71,11 @@
                   </div>
                </div>
             </section>
+            <!-- /TV SERIES  -->
+            <!-- MOVIES  -->
             <section v-if="movies.length != 0" class="movies_section">
                <h2>Movies</h2>
-               <div class="movies">
+               <div v-dragscroll class="movies">
                   <div class="movie"v-for="movie in movies" v-if="movie.poster_path != null" class="movie">
                      <div class="poster">
                         <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" :alt="movie.title">
@@ -82,8 +92,11 @@
                   </div>
                </div>
             </section>
+            <!-- MOVIES  -->
          </main>
       </div>
+      <script src="https://unpkg.com/vue"></script>
+      <script src="https://unpkg.com/vue-dragscroll"></script>
       <script src="js/script.js"></script>
    </body>
 </html>
