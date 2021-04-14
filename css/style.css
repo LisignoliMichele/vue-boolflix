@@ -4,7 +4,6 @@
    margin: 0;
    padding: 0;
 }
-
 /* MIX */
 body{
    background-color: #212322;
@@ -13,6 +12,31 @@ body{
 *:focus{
    outline: transparent;
 }
+/* OPENING */
+.opening{
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   z-index: 20;
+   background-color: black;
+   display: flex;   
+   filter: opacity(1);
+   transition: all 2s;
+}
+.opening img{
+   max-width: 20%;
+  margin: auto
+}
+.opening:hover{
+   filter: opacity(0);
+   
+}
+.displaynone{
+   display:none
+}
+
 /* NAV */
 .container.navBar{
    background-color: rgba(255, 255, 255, 0.1);
@@ -38,14 +62,11 @@ nav .right{
 nav .right .languages{
    margin-left: 20px;
 }
-.languages select{
+select{
    background: transparent;
    border: transparent;
    color: #fff;
-}
-.languages select option{
-   border: transparent;
-   color: #fff;
+   margin-left: 15px;
 }
 .search{
    padding: 10px;
@@ -54,7 +75,6 @@ nav .right .languages{
 .searchInput{
    background-color: transparent;
    border: transparent;
-   margin-left: 10px;
    color: #fff;
    font-family: 'Open Sans', sans-serif;
    font-size: 16px;
@@ -95,9 +115,17 @@ section{
 section:first-of-type{
    margin-top: 100px;
 }
+.sectionNav{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
 section h2{
    color: #cecece;
    margin-bottom: 20px;
+}
+.sectionNav select{
+   margin-right: 40px;
 }
 .movies,
 .series{

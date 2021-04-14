@@ -3,16 +3,23 @@ var app = new Vue ({
    data:{
       searchURL: "https://api.themoviedb.org/3/search/",
       creditsURL: "https://api.themoviedb.org/3/",
+      genresURL: "https://api.themoviedb.org/3/genre/",
       serieIndex: 0,
       moviesIndex: 0,
       movies: [],
       series:[],
       seriesCast: [],
       moviesCast: [],
+      genersTV: [],
+      genersMovie: [],
+      selectedTvGenre: "",
+      selectedMoviesGenre: "",
+      secectedMoviesGenre: "",
       search: "",
       apiKey: "f89e14052a0d0db382004cc67a28c7d5",
       languages:[
-         {
+         {  
+            name: "IT",
             language: "it-IT",
             sectionTvTitle: "Serie TV",
             sectionMoviesTitle: "Film",
@@ -20,9 +27,11 @@ var app = new Vue ({
             originalName: "Titolo originale",
             vote: "Voto",
             overview: "Riassunto",
-            charactersButton: "scopri gli attori"
+            charactersButton: "scopri gli attori",
+            placeholder: "Titoli, persone, generi"
          },
          {
+            name:"EN",
             language: "en-US",
             sectionTvTitle: "TV Series",
             sectionMoviesTitle: "Movies",
@@ -30,9 +39,11 @@ var app = new Vue ({
             originalName: "Original name",
             vote: "Vote",
             overview: "Overview",
-            charactersButton: "find actors"
+            charactersButton: "find actors",
+            placeholder: "Titles, people, genres"
          },
          {
+            name:"ES",
             language: "es-ES",
             title: "Título",
             sectionTvTitle: "Series de Televisión",
@@ -40,9 +51,11 @@ var app = new Vue ({
             originalName: "Nombre original",
             vote: "Votar",
             overview: "Descripción",
-            charactersButton: "descubrir actores"
+            charactersButton: "descubrir actores",
+            placeholder: "Títulos, personas, géneros"
          },
          {
+            name:"DE",
             language: "de-DE",
             title: "Titel",
             sectionTvTitle: "TV-Serie",
@@ -50,9 +63,11 @@ var app = new Vue ({
             originalName: "Originaler Titel",
             vote: "Abstimmung",
             overview: "Überblick",
-            charactersButton: "Schauspieler finden"
+            charactersButton: "Schauspieler finden",
+            placeholder: "Titel, Menschen, Genres"
          },
          { 
+            name:"中国",
             language: "zh-CN",
             title: "标题",
             sectionTvTitle: "电视剧",
@@ -60,9 +75,11 @@ var app = new Vue ({
             originalName: "原名",
             vote: "投票",
             overview: "概述",
-            charactersButton: "寻找演员"
+            charactersButton: "寻找演员",
+            placeholder: "头衔，人物，体裁"
          },
          {
+            name:"RU",
             language: "ru-RU",
             title: "Заголовок",
             sectionTvTitle: "Серия ТВ",
@@ -70,22 +87,23 @@ var app = new Vue ({
             originalName: "Оригинальное название" ,
             vote: "Голосование",
             overview: "Рассмотрение",
-            charactersButton: "найти актеров"
+            charactersButton: "найти актеров",
+            placeholder: "Названия, люди, жанры"
          }   
-      ],
-      flags:["ad", "ae", "af", "al", "ar", "at", "ch", "cn", "cs", "da", "de", "en", "es", "et", "eu", "fi", "fr", "gl", "hi", "hr", "hu", "it", "ja", "ka", "ko", "ml", "nl", "no", "pl", "pt", "ru", "sr", "sv", "te", "th", "tl", "zr", "zh"],
-      languagesIndex: 0,
-      styleSearchWw: "",
-      styleSearchBg: "",
-      styleCancel__X: "",
+         ],
+         flags:["ad", "ae", "af", "al", "ar", "at", "ch", "cn", "cs", "da", "de", "en", "es", "et", "eu", "fi", "fr", "gl", "hi", "hr", "hu", "it", "ja", "ka", "ko", "ml", "nl", "no", "pl", "pt", "ru", "sr", "sv", "te", "th", "tl", "zr", "zh"],
+         languagesIndex: 0,
+         styleSearchWw: "",
+         styleSearchBg: "",
+         styleCancel__X: "",
+         opening_layer: "",
    },
    methods:{
 
       searchActive: function(){
          if (this.styleSearchWw == ''){
                this.styleSearchWw = 'styleSearchWw__active';
-               this.styleSearchBg = 'styleSearchBg__active';
-               
+               this.styleSearchBg = 'styleSearchBg__active';      
          }
       },
       showXdelete: function(){
@@ -99,8 +117,7 @@ var app = new Vue ({
          this.search = "",
          this.styleCancel__X ='';
       },
-      getMovie: function(){
-         
+      getMovie: function(){  
          axios.get(this.searchURL + "movie", {
             params: {
                api_key: this.apiKey,
@@ -139,7 +156,9 @@ var app = new Vue ({
              });
          });
       },
-
+      printselected: function(){
+         console.log(this.selectedGenre)
+      },
       getTvCredits: function(){
          this.seriesCast = [],
          axios.get(this.creditsURL + "tv/" + this.series[this.serieIndex].id + "/credits?v", {
@@ -158,7 +177,6 @@ var app = new Vue ({
                         this.seriesCast.push(character.name);
                      })
                   }
-                  console.log(this.seriesCast)
                }
             })
       },
@@ -180,12 +198,58 @@ var app = new Vue ({
                         this.moviesCast.push(character.name);
                      })
                   }
-                  console.log(this.moviesCast)
                }
             })
       },
+      hide:function(){
+         setTimeout(this.opening_layer = "displaynone"
+         , 2000)
+      },
+   },
+   mounted: function(){
+         
+     
+
+      axios.get(this.genresURL + "tv/list",{
+         params: {
+            api_key: this.apiKey,
+            query: this.search,
+            language: "en_EN",
+         }
+         })
+         .then((serverAnswer) =>{
+            serverAnswer.data.genres.forEach((genre) =>{
+               this.genersTV.push(genre)
+            })
+         })
+      axios.get(this.genresURL + "movie/list",{
+         params: {
+            api_key: this.apiKey,
+            query: this.search,
+            language: "en_EN",
+         }
+         })
+         .then((serverAnswer) =>{
+            serverAnswer.data.genres.forEach((genre) =>{
+               this.genersMovie.push(genre)
+            })
+         })
+      
+   },
+   
+   
+   computed:{
+      filtredTVseries: function(){
+          return this.series.filter((serie) =>{
+                  return serie.genre_ids.includes(this.selectedTvGenre)
+               })
+      },
+      filtredMovies: function(){
+            return this.movies.filter((movie) =>{
+                 return movie.genre_ids.includes(this.secectedMoviesGenre)
+              })
+      }
+
    }
+
 });
-
-
-  

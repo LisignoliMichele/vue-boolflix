@@ -18,6 +18,9 @@
    </head>
    <body>
       <div id="app">
+         <div class="opening" v-on:mouseover="hide" :class="opening_layer">
+            <img src="img/logo_B_Boolflix.png" alt="logo_boolflix">
+         </div>
          <!-- HEADER NAV-->
          <header>
             <div class="container navBar">
@@ -31,17 +34,12 @@
                      <!-- SEARCH AND SELECT -->
                      <div :class="styleSearchBg" class="search">
                         <label @click="searchActive" class="searchIcon" for="searchInput"><i class="fas fa-search"></i></label>
-                        <input @keypress="showXdelete" :class="styleSearchWw" class="searchInput" id="searchInput" v-model="search" type="text" placeholder="Titoli, Persone, Generi" @keydown.13="getMovie">
+                        <input @keypress="showXdelete" :class="styleSearchWw" class="searchInput" id="searchInput" v-model="search" type="text" :placeholder="languages[languagesIndex].placeholder" @keydown.13="getMovie">
                         <div :class="styleCancel__X" @click="xDelete" class="cancel__X"><i class="fas fa-times"></i></div>
                      </div>
                      <div class='languages'>
-                        <select  v-model="languagesIndex" name="" id="" @change="getMovie">
-                           <option value="0">IT</option>
-                           <option value="1">EN</option>
-                           <option value="2">ES</option>
-                           <option value="3">DE</option>
-                           <option value="4">中国</option>
-                           <option value="5">RU</option>
+                        <select  v-model="languagesIndex" @change="getMovie">
+                           <option v-for="(language, index) in languages" :value="index">{{language.name}}</option>
                         </select>
                      </div>
                      <!-- /SEARCH AND SELECT -->
@@ -53,12 +51,24 @@
          <main>
             <!-- TV SERIES  -->
             <section v-if="series.length != 0" class="series_section">
-               <h2>{{languages[languagesIndex].sectionTvTitle}}</h2>
+               <!-- section top -->
+               <nav class="sectionNav">
+                  <h2>{{languages[languagesIndex].sectionTvTitle}}</h2>
+                  <select  v-if="genersTV.length > 0"  v-model="selectedTvGenre">
+                     <option value="">Tutti i generi</option>
+                     <option v-for="genre in genersTV" :value="genre.id">{{genre.name}}</option>
+                  </select>
+               </nav>
+               <!-- /section top -->
+               <!-- section main -->
                <div v-dragscroll class="series">
                   <div class="movie" v-for="(serie, index) in series" @click="serieIndex = index" v-on:mouseleave="seriesCast = []" v-if="serie.poster_path != null" class="serie">
+                     <!--poster -->
                      <div class="poster">
                         <img :src="'https://image.tmdb.org/t/p/w500' + serie.poster_path" :alt="serie.name">
                      </div>
+                     <!--/poster -->
+                     <!-- info -->
                      <div class="info">
                         <div class="flag">
                            <img v-if="flags.includes(serie.original_language)" :src="'img/' + serie.original_language + '.png'">
@@ -75,18 +85,32 @@
                            </ul>
                         </div>
                      </div>
+                     <!-- /info -->
                   </div>
                </div>
+               <!-- /section main -->
             </section>
             <!-- /TV SERIES  -->
             <!-- MOVIES  -->
             <section v-if="movies.length != 0" class="movies_section">
-               <h2>{{languages[languagesIndex].sectionMoviesTitle}}</h2>
+               <!-- section top -->
+               <nav class="sectionNav">
+                  <h2>{{languages[languagesIndex].sectionMoviesTitle}}</h2>
+                  <select  v-if="genersMovie.length > 0"  v-model="selectedMoviesGenre">
+                     <option value="">Tutti i generi</option>
+                     <option v-for="genre in genersMovie" :value="genre.id">{{genre.name}}</option>
+                  </select>
+               </nav>
+               <!-- /section top -->
+               <!-- section main -->
                <div v-dragscroll class="movies">
                   <div class="movie" v-for="(movie, index) in movies" @click="moviesIndex = index" v-on:mouseleave="moviesCast = []" v-if="movie.poster_path != null" class="movie">
+                     <!--poster -->
                      <div class="poster">
                         <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" :alt="movie.title">
                      </div>
+                     <!--/poster -->
+                     <!-- info -->
                      <div class="info">
                         <div class="flag">
                            <img v-if="flags.includes(movie.original_language)" :src="'img/' + movie.original_language + '.png'">
@@ -103,8 +127,10 @@
                            </ul>
                         </div>
                      </div>
+                     <!-- /info -->
                   </div>
                </div>
+               <!-- /section main -->
             </section>
             <!-- MOVIES  -->
          </main>
