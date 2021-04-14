@@ -201,15 +201,9 @@ var app = new Vue ({
                }
             })
       },
-      hide:function(){
-         setTimeout(this.opening_layer = "displaynone"
-         , 2000)
-      },
+    
    },
    mounted: function(){
-         
-     
-
       axios.get(this.genresURL + "tv/list",{
          params: {
             api_key: this.apiKey,
