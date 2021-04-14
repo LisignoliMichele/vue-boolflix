@@ -1,5 +1,5 @@
 /* RESET */
-*{
+*{ 
    box-sizing: border-box;
    margin: 0;
    padding: 0;
@@ -90,7 +90,6 @@ nav .right .languages{
 select{
    background: transparent;
    border: transparent;
-   color: #fff;
    margin-left: 15px;
 }
 .search{
@@ -130,6 +129,7 @@ select{
 }
 .searchIcon{
    color: #fff;
+   margin-right: 15px;
 }
 
 /* MAIN */
@@ -235,6 +235,78 @@ section h2{
 .movie .info .flag img{
    width: 100%;
 }
+.movie .info .chack_top{
+   position: absolute;
+   z-index: 15;
+   width: 200%;
+   top: 0;
+   right: 0;
+}
+.movie .info .chack_bottom{
+   position: absolute;
+   width: 100%;
+   bottom: -5px;
+   right: 0;
+}
+.movie .info .chack_bottom img{
+   width: 0;
+}
+.movie:hover .info .chack_bottom img{
+   width: 0;
+   animation-name: chack-actionBottom;
+   animation-duration: 1s;
+   animation-timing-function: linear;
+}
+@keyframes chack-actionBottom {
+   0%{
+      width: 100%;
+    }
+    60%{
+      filter: opacity(1);
+    }
+    97%{
+      filter: opacity(0);
+      width: 100%;
+    }
+    100%{
+      width: 0;
+      filter: opacity(0);
+      
+   }
+}
+
+.movie .info .chack_top img{
+   width: 0;
+}
+.movie:hover .info .chack_top img{
+   width: 0;
+   animation-name: chack-action;
+   animation-duration: 1s;
+   animation-timing-function: linear;
+}
+@keyframes chack-action {
+   0%{
+      width: 100%;
+    }
+    20%{
+      transform: rotate(0deg);
+    }
+    40%{
+      transform: rotate(-40deg);
+    }
+    60%{
+      transform: rotate(0deg);
+      filter: opacity(1);
+    }
+    97%{
+      filter: opacity(0);
+      width: 100%;
+    }
+   100%{
+      width: 0;
+      filter: opacity(0);
+    }
+   }
 .movie:hover .info{
    display: block;
 }
